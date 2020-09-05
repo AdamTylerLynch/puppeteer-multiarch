@@ -18,6 +18,6 @@ WORKDIR /home/node
 
 # Install the major packages globally, so not done every time we use the image
 COPY set_yarn_links.sh .
-RUN chmod +x ./set_yarn_links.sh && \
+RUN chmod u+x ./set_yarn_links.sh && \
     ./set_yarn_links.sh && \
     rm ./set_yarn_links.sh 
