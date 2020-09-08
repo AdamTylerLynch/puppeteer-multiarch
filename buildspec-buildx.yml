@@ -1,0 +1,20 @@
+version: 0.2
+# based on the following AWS documentation:
+# https://docs.aws.amazon.com/codebuild/latest/userguide/sample-docker.html
+# https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-multi-architecture-image.html
+# Verify the CodeBuild execution role can access ECR. I used the AmazonEC2ContainerRegistryPowerUser policy and attached it to my CodeBuild execution role.
+# https://docs.aws.amazon.com/AmazonECR/latest/userguide/ecr_managed_policies.html
+phases:
+    install:
+        commands:
+            - yum update -y
+    pre_build:
+        commands:
+            - echo Logging in to Amazon ECR...
+            - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+    build:
+        commands:
+            - echo Build started on `date`
+            - echo Building the Docker image with buildx and pushing to the repo...          
+            - export DOCKER_CLI_EXPERIMENTAL=enabled  
+            - docker buildx build --platform linux/amd64,linux/arm64 --tag $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG  --push .
