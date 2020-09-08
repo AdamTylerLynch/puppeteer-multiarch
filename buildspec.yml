@@ -2,7 +2,7 @@ version: 0.2
 # based on the following AWS documentation:
 # https://docs.aws.amazon.com/codebuild/latest/userguide/sample-docker.html
 # https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-multi-architecture-image.html
-# Verify the CodeBuild execution role can access ECR. I used the AmazonEC2ContainerRegistryPowerUser policy and attached it to my CodeBuild execution role.
+# Verify the CodeBuild execution role can access ECR. 
 # https://docs.aws.amazon.com/AmazonECR/latest/userguide/ecr_managed_policies.html
 phases:
     install:
