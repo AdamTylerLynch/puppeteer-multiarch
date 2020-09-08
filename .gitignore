@@ -1,7 +1,8 @@
-README.md
+README.md.private
 HelloTyler.txt
 Notes.txt
 
+.DS_Store
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
