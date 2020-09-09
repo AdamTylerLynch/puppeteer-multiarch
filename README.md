@@ -7,6 +7,7 @@ For building the multi-arch images, we are going to produce native build docker 
 I referenced the following documentation to complete the solution:
 https://docs.aws.amazon.com/codebuild/latest/userguide/sample-docker.html
 https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-push-multi-architecture-image.html
+https://aws.amazon.com/blogs/containers/introducing-multi-architecture-container-images-for-amazon-ecr/
 
 ## CodeBuild Projects
 Let's start with creating two CodeBuild projects, one for building amd64 and one for arm64 Docker images (we will create a third for Docker manifest creation later). The projects should be boilerplate, reading source from your SCM or getting it via the CodeBuild Jenkins Plugin. Each should be configured to run the standard image of your choice and on the proper architecture (amd64 or arm64), I chose Amazon Linux 2.
