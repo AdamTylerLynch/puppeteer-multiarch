@@ -1,7 +1,7 @@
 version: 0.2
 # based on the following AWS blog:
 # https://aws.amazon.com/blogs/containers/introducing-multi-architecture-container-images-for-amazon-ecr/
-# based on the following Docker documentation, must include the DOCKER_CLI_EXPERIMENTAL environmet variable
+# based on the following Docker documentation, must include the DOCKER_CLI_EXPERIMENTAL environment variable
 # https://docs.docker.com/engine/reference/commandline/manifest/    
 # based on the following AWS documentation:
 # https://docs.aws.amazon.com/codebuild/latest/userguide/sample-docker.html
