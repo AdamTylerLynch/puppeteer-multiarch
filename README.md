@@ -12,6 +12,14 @@ Important things to note:
 
 1. Configure the project to use the buildspec.yml from source.
 2. Since I am using the same `buildspec.yml` file for both CodeBuild projects, we are going to use environment variables on the CodeBuild projects to handle image tagging.
+3. Make sure to specify 
+
+Environemtn Variables:
+- AWS_DEFAULT_REGION
+- AWS_ACCOUNT_ID
+- IMAGE_REPO_NAME
+- IMAGE_TAG
+- IMAGE_ARCH
 
 ![Image of ARM Project](images/Figure1.png)
 
