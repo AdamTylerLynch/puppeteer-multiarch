@@ -10,9 +10,11 @@ Let's start with creating two CodeBuild projects, one for building amd64 and one
 
 Important things to note: 
 
-1. Configure the project to use the buildspec.yml from source.
-2. Since I am using the same `buildspec.yml` file for both CodeBuild projects, we are going to use environment variables on the CodeBuild projects to handle image tagging.
-3. Make sure to specify the following environment variables:
+1. Use Amazon Linux 2 (not Ubuntu)
+2. Mark the project as "Privileged"
+3. Configure the project to use the buildspec.yml from source.
+4. Since I am using the same `buildspec.yml` file for both CodeBuild projects, we are going to use environment variables on the CodeBuild projects to handle image tagging.
+5. Make sure to specify the following environment variables:
 
 Environment Variable | arm64 Project | amd64 Project | manifest Project
 ---------------------|---------------|---------------|---------
