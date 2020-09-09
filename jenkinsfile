@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build and push images') {
+            parallel {
+                stage('Build arm64') {
+                    steps {
+                            build job: "Puppeteer-ARM", wait: true
+                    }
+                }
+                stage('Build amd64') {
+                    steps {
+                            build job: "Puppeteer-x86", wait: true
+                    }
+                }
+            }
+        }
+        stage('Create Manifest'){
+            steps {
+                build job: "Puppeteer-Manifest", wait: true
+            }
+        }
+    }
+}
