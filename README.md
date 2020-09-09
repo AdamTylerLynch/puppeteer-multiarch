@@ -1,3 +1,6 @@
+:warning: **FOR EDUCATIONAL PURPOSES ONLY** :warning:
+Docker images, buildspecs, and guidance provided as proof of concept only and for educational purposes only.
+
 # Creating multi-arch headless browsing (Puppeteer) Docker image
 For building the multi-arch images, we are going to produce native build docker images using AWS CodeBuild, publish them to ECR, and then tie them together with a docker image manifest.
 
