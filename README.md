@@ -39,7 +39,9 @@ _It is important to note that the IMAGE_TAG and IMAGE_ARCH be properly defined a
 Each project will be executed independently to produce a platform native image, and push that image to ECR. In the next section we will tie them together with a Docker manifest.
 
 `- docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG --build-arg ARCH=$IMAGE_ARCH/ .`
+
 `- docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG`
+
 `- docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG`
 
 ### Creating a Docker manifest to reference native architecture images
@@ -51,14 +53,18 @@ This project will will create a Docker manifest pointing to the amd64 and arm64 
 
 Create the manifest, and during that creation reference the two native images that were built and pushed previously. We do not yet push the manifest to ECR. I also did not specify a tag for this manifest, so `latest` is assumed. 
 _Note that I hardcoded the previous image tags here, but you can easily use environment variables._
+
 `- docker manifest create $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest-arm64v8 $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest-amd64`
 
 Now, we annotate the newly created manifest to specify the platform architecture, and we again reference the two native images that were built and pushed previously. 
 _Note that I hardcoded the previous image tags here, but you can easily use environment variables._
+
 `- docker manifest annotate --arch arm64 $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest-arm64v8`
+
 `- docker manifest annotate --arch amd64 $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest-amd64`
 
 Last, we push this manifest to ECR.
+
 `- docker manifest push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME`
 
 ## Using Jenkins to orchestrate
